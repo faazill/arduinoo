@@ -1,26 +1,9 @@
 const int buzzerPin = 11;
 
-// Notes
-#define C4 262
-#define D4 294
-#define E4 330
-#define F4 349
-#define G4 392
-#define A4 440
-
-int melody[] = {
-  C4, C4, G4, G4,
-  A4, A4, G4,
-  F4, F4, E4, E4,
-  D4, D4, C4
-};
-
-int duration[] = {
-  400, 400, 400, 400,
-  400, 400, 800,
-  400, 400, 400, 400,
-  400, 400, 800
-};
+// Approximate meme-style rhythm
+#define LOW_NOTE 220
+#define MID_NOTE 330
+#define HIGH_NOTE 440
 
 void setup() {
   pinMode(buzzerPin, OUTPUT);
@@ -28,14 +11,28 @@ void setup() {
 
 void loop() {
 
-  for (int i = 0; i < 14; i++) {
+  // "Modi"
+  tone(buzzerPin, MID_NOTE, 180);
+  delay(200);
 
-    tone(buzzerPin, melody[i], duration[i]);
+  tone(buzzerPin, HIGH_NOTE, 250);
+  delay(270);
 
-    delay(duration[i] + 50);
+  // "Modi"
+  tone(buzzerPin, MID_NOTE, 180);
+  delay(200);
 
-    noTone(buzzerPin);
-  }
+  tone(buzzerPin, HIGH_NOTE, 250);
+  delay(270);
+
+  // "Modi"
+  tone(buzzerPin, MID_NOTE, 180);
+  delay(200);
+
+  tone(buzzerPin, LOW_NOTE, 500);
+  delay(550);
+
+  noTone(buzzerPin);
 
   delay(1000);
 }

@@ -4,6 +4,7 @@ const int trigPin = 9;
 const int echoPin = 10;
 
 const int buzzerPin = 11;
+const int ledPin = 12;
 
 void setup() {
   pinMode(pirPin, INPUT);
@@ -12,6 +13,7 @@ void setup() {
   pinMode(echoPin, INPUT);
 
   pinMode(buzzerPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
 
   Serial.begin(9600);
 }
@@ -35,21 +37,21 @@ void loop() {
   int motion = digitalRead(pirPin);
   float distance = getDistance();
 
-  if (motion == HIGH) {
-    Serial.print("Motion Detected | Distance: ");
-    Serial.print(distance);
-    Serial.println(" cm");
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.print(" cm | ");
 
-    // Turn buzzer ON when motion is detected
+  if (motion == HIGH) {
+    Serial.println("Motion Detected");
+
     digitalWrite(buzzerPin, HIGH);
+    digitalWrite(ledPin, HIGH);
   } 
   else {
-    Serial.print("No Motion | Distance: ");
-    Serial.print(distance);
-    Serial.println(" cm");
+    Serial.println("No Motion");
 
-    // Turn buzzer OFF when no motion is detected
     digitalWrite(buzzerPin, LOW);
+    digitalWrite(ledPin, LOW);
   }
 
   delay(500);
